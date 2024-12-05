@@ -19,6 +19,7 @@ public class EmbeddedServer {
     private ConfigurableApplicationContext ctx;
     private Consumer<Boolean> serverStateCallback; // 用于通知客户端的回调
     private static final Logger logger = LoggerFactory.getLogger(EmbeddedServer.class);
+    ServerConfig config;
 
     public void start(Consumer<Boolean> stateCallback) {
         this.serverStateCallback = stateCallback; // 注册回调
@@ -29,7 +30,6 @@ public class EmbeddedServer {
     }
 
     private void runServer() {
-        ServerConfig config;
         try {
             config = ServerConfig.loadConfig("./config/server-config.json");
         } catch (IOException e) {
@@ -87,7 +87,7 @@ public class EmbeddedServer {
 
     private void openInBrowser() {
         try {
-            URI uri = new URI("http://localhost:8080/");
+            URI uri = new URI("http://localhost:" + config.getPort());
             Desktop.getDesktop().browse(uri);
         } catch (Exception e) {
             logger.error("Failed to open browser", e);
