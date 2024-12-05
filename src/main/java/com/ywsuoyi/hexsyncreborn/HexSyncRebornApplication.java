@@ -1,13 +1,12 @@
 package com.ywsuoyi.hexsyncreborn;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.ywsuoyi.hexsyncreborn.client.ClientUI;
 
-@SpringBootApplication
 public class HexSyncRebornApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HexSyncRebornApplication.class, args);
+        ClientUI clientUI = new ClientUI();
+        clientUI.start();
     }
 
 }
